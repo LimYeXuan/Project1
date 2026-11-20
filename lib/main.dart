@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
-
-const String larryImage = 'assets/image/larry.jpg';
-
-// Palette
-const Color cream = Color(0xFFF6F1E9);
-const Color deepTeal = Color(0xFF1F6F6B);
-const Color softTeal = Color(0xFFD6EBE8);
-const Color brown = Color(0xFF6B4A3A);
-const Color tan = Color(0xFFB08968);
+import 'package:lab_1/block.dart';
+import 'package:lab_1/palette.dart';
 
 void main() {
   runApp(const MainPage());
@@ -52,7 +45,22 @@ class MainPage extends StatelessWidget {
               SizedBox(height: 8),
               ProfileBadge(),
               SizedBox(height: 40),
-              StatsRow(),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12),
+                child: Row(
+                  children: [
+                    Block(icon: Icons.people, value: '1.2K', label: 'Followers'),
+                    Block(icon: Icons.person_add, value: '3', label: 'Following'),
+                    Block(icon: Icons.photo_library, value: '48', label: 'Posts'),
+                    Block(
+                      icon: Icons.favorite,
+                      value: '9.9K',
+                      label: 'Likes',
+                      color: brown,
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
@@ -102,69 +110,6 @@ class ProfileBadge extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.bold, color: cream),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class StatsRow extends StatelessWidget {
-  const StatsRow({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 12),
-      child: Row(
-        children: [
-          StatCard(icon: Icons.people, value: '1.2K', label: 'Followers'),
-          StatCard(icon: Icons.person_add, value: '3', label: 'Following'),
-          StatCard(icon: Icons.photo_library, value: '48', label: 'Posts'),
-          StatCard(icon: Icons.favorite, value: '9.9K', label: 'Likes'),
-        ],
-      ),
-    );
-  }
-}
-
-class StatCard extends StatelessWidget {
-  final IconData icon;
-  final String value;
-  final String label;
-
-  const StatCard({
-    super.key,
-    required this.icon,
-    required this.value,
-    required this.label,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 4),
-        padding: const EdgeInsets.all(14),
-        decoration: BoxDecoration(
-          color: deepTeal,
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Icon(icon, size: 30, color: softTeal),
-            const SizedBox(height: 10),
-            Text(
-              value,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-                color: cream,
-              ),
-            ),
-            const SizedBox(height: 4),
-            Text(label, style: const TextStyle(fontSize: 12, color: cream)),
-          ],
-        ),
       ),
     );
   }
